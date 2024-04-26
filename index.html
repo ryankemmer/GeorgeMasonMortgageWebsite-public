@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>George Mason Mortgage, LLC "Purchase"</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" type="image/jpg" href="mclister.jpg" />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+    ></script>
+    <script src="apikeys.js"></script>
+    <!-- date picker -->
+    <script type="text/javascript" src="date.js"></script>
+
+    <script type="text/javascript">
+      (function () {
+        emailjs.init(apiKeys.USER_ID);
+      })();
+    </script>
+    <!-- Required meta tags -->
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <script type="text/javascript">
+    window.onload = function () {
+      var wasSubmitted = false;
+      /**
+       * update and format the birthday
+       */
+      const updateBirthday = (e) => {
+        // "1999-07-19".split("-")
+        const birthdayElements = document
+          .getElementById("birthdate-entry")
+          .value.split("-");
+        const formattedBirthday = `${birthdayElements[1]} / ${birthdayElements[2]} / ${birthdayElements[0]}`;
+        document.getElementById("BirthdayReal").value = formattedBirthday;
+        console.log(formattedBirthday);
+      };
+
+      document
+        .getElementById("my-form")
+        .addEventListener("submit", function (e) {
+          if (wasSubmitted == false) {
+            e.preventDefault();
+            emailjs
+              .sendForm(apiKeys.CONTACT_SERVICE, apiKeys.TEMPLATE, this)
+              .then(
+                function () {
+                  console.log("SUCCESS!");
+                  window.location.replace("confirm.html");
+                  wasSubmitted = true;
+                },
+                function (error) {
+                  console.log("FAILED...", error);
+                }
+              );
+          }
+        });
+
+      /**
+       * send the email and replace with success screen on completion
+       */
+
+      // add event listeners
+      document
+        .getElementById("birthdate-entry")
+        .addEventListener("input", updateBirthday);
+    };
+  </script>
+
+  <body>
+    <div class="testbox">
+      <div id="formDiv">
+        <form class="my-form" id="my-form">
+          <div class="banner">
+            <h1>George Mason Mortgage, LLC Prospective Applicant Form</h1>
+          </div>
+          <div class="item">
+            <p>Full Name</p>
+            <div class="name-item">
+              <input type="text" name="First" placeholder="First" required />
+              <input type="text" name="Middle" placeholder="Middle Initial" />
+              <input type="text" name="Last" placeholder="Last" required />
+            </div>
+          </div>
+
+          <div class="item">
+            <p>Current Address</p>
+            <div class="nicediv">
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="Address"
+                  placeholder="Address"
+                  required
+                />
+                <input type="text" name="City" placeholder="City" required />
+                <select name="State" required>
+                  <option value="" disabled selected>State</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <input type="text" name="ZIP" placeholder="ZIP" required />
+                <input
+                  type="text"
+                  name="YearsLived"
+                  placeholder="# of Years Lived"
+                  required
+                />
+              </div>
+
+              <div class="question">
+                <div class="question-answer">
+                  Do you Rent or Own?
+                  <input
+                    type="radio"
+                    value="Rent"
+                    id="radio_4001"
+                    name="ADD1Rent"
+                  />
+                  <label for="radio_4001" class="radio"
+                    ><span>Rent</span></label
+                  >
+                  <input
+                    type="radio"
+                    value="Own"
+                    id="radio_5001"
+                    name="ADD1Rent"
+                  />
+                  <label for="radio_5001" class="radio"><span>Own</span></label>
+                </div>
+              </div>
+
+              <div class="item">
+                <p><b>If Renting, please provide monthly rent payment.</b></p>
+                <div class="name-item">
+                  <input
+                    type="text"
+                    name="MonthlyRent1"
+                    placeholder="Monthly rent payment"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <p>
+              IF LESS THAN 2 YEARS AT ABOVE ADDRESS, please provide previous
+              address
+            </p>
+            <div class="nicediv">
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="PrevAddress"
+                  placeholder="Previous Address"
+                />
+                <input type="text" name="PrevCity" placeholder="City" />
+                <select name="PrevState">
+                  <option value="" disabled selected>State</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                <input type="text" name="PrevZIP" placeholder="ZIP" />
+                <input
+                  type="text"
+                  name="PrevYearsLived"
+                  placeholder="# of Years Lived"
+                />
+              </div>
+
+              <div class="question">
+                <div class="question-answer">
+                  Did you Rent or Own?
+                  <input
+                    type="radio"
+                    value="Rent"
+                    id="radio_4201"
+                    name="ADD2Rent"
+                  />
+                  <label for="radio_4201" class="radio"
+                    ><span>Rent</span></label
+                  >
+                  <input
+                    type="radio"
+                    value="Own"
+                    id="radio_5201"
+                    name="ADD2Rent"
+                  />
+                  <label for="radio_5201" class="radio"><span>Own</span></label>
+                </div>
+              </div>
+
+              <div class="item">
+                <p><b>If Rented, please provide monthly rent payment.</b></p>
+                <div class="name-item">
+                  <input
+                    type="text"
+                    name="MonthlyRent2"
+                    placeholder="Previous Monthly Rent Payment"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <p>Email</p>
+            <div class="name-item">
+              <input type="text" name="Email" placeholder="E-mail" required />
+            </div>
+          </div>
+          <div class="item">
+            <p>Phone</p>
+            <div class="name-item">
+              <input
+                type="text"
+                name="Phone"
+                placeholder="Phone Number (Cell)"
+                required
+              />
+            </div>
+          </div>
+          <div class="item">
+            <p>SSN</p>
+            <div class="name-item">
+              <input
+                type="text"
+                name="SSN"
+                placeholder="Social Security Number"
+                required
+              />
+            </div>
+          </div>
+          <div class="item">
+            <p>Birth Date</p>
+            <input id="birthdate-entry" type="date" name="Ddate" required />
+            <input
+              type="hidden"
+              id="BirthdayReal"
+              name="BirthdayReal"
+              value=""
+            />
+          </div>
+
+          <div class="question">
+            <p>Martial Status</p>
+            <div class="question-answer">
+              <input
+                type="radio"
+                value="Single"
+                id="single"
+                name="Martial_Status"
+              />
+              <label for="single" class="radio"><span>Single</span></label>
+              <input
+                type="radio"
+                value="Married"
+                id="married"
+                name="Martial_Status"
+              />
+              <label for="married" class="radio"><span>Married</span></label>
+              <input
+                type="radio"
+                value="Separated"
+                id="separated"
+                name="Martial_Status"
+              />
+              <label for="separated" class="radio"
+                ><span>Separated</span></label
+              >
+              <input
+                type="radio"
+                value="Divorced"
+                id="divorced"
+                name="Martial_Status"
+              />
+              <label for="divorced" class="radio"><span>Divorced</span></label>
+            </div>
+          </div>
+
+          <div class="item">
+            <p>Number of Dependents</p>
+            <div>
+              <select name="DependentCount" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10+">10 +</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="item">
+            <p>Dependents Age</p>
+            <div class="name-item">
+              <textarea
+                rows="1"
+                name="DependentAge"
+                placeholder="Please Provide a comma separted list of dependents age. If none, put N/A"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>1. Tell us about the request</p>
+              <div class="question-answer">
+                Are you a 1st time home buyer?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_7"
+                  name="FirstTimeBuy"
+                />
+                <label for="radio_7" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_8"
+                  name="FirstTimeBuy"
+                />
+                <label for="radio_8" class="radio"><span>No</span></label>
+              </div>
+              <div class="question-answer">
+                Are you a US Citizen?
+                <input type="radio" value="Yes" id="radio_9" name="USCitizen" />
+                <label for="radio_9" class="radio"><span>Yes</span></label>
+                <input type="radio" value="No" id="radio_10" name="USCitizen" />
+                <label for="radio_10" class="radio"><span>No</span></label>
+              </div>
+              <div>
+                If not, what is your visa status (R-1, H-1) etc and Country of
+                Origin?
+                <textarea name="VisaStatus" rows="1"></textarea>
+              </div>
+              <div class="question-answer">
+                Are you obligated to pay Alimony or child support?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_11"
+                  name="AlimonyStatus"
+                />
+                <label for="radio_11" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_12"
+                  name="AlimonyStatus"
+                />
+                <label for="radio_12" class="radio"><span>No</span></label>
+              </div>
+              <div>
+                If yes, how much do you pay?
+                <textarea name="AlimonyStatusAmount" rows="1"></textarea>
+              </div>
+              <div class="question-answer">
+                Do you receive any alimony or child support?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_32"
+                  name="ChildSupport"
+                />
+                <label for="radio_32" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_33"
+                  name="ChildSupport"
+                />
+                <label for="radio_33" class="radio"><span>No</span></label>
+              </div>
+
+              <div>
+                If so, what is the monthly amount?
+                <textarea name="ChildSupportAmount" rows="1"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>2. Tell us about the Property you are interested in</p>
+              What is the purpose of the property?
+              <br />
+              <div class="question-answer">
+                <input
+                  type="radio"
+                  value="Primary Residence"
+                  id="radio_2000"
+                  name="PropertyPurp"
+                />
+                <label for="radio_2000" class="radio"
+                  ><span>Primary Residence</span></label
+                >
+                <input
+                  type="radio"
+                  value="Second Home"
+                  id="radio_2100"
+                  name="PropertyPurp"
+                />
+                <label for="radio_2100" class="radio"
+                  ><span>Second Home</span></label
+                >
+                <input
+                  type="radio"
+                  value="Investment Home"
+                  id="radio_2200"
+                  name="PropertyPurp"
+                />
+                <label for="radio_2200" class="radio"
+                  ><span>Investment Home</span></label
+                >
+              </div>
+
+              What is the property type?
+              <br />
+              <div class="question-answer">
+                <input
+                  type="radio"
+                  value="Single Family Home"
+                  id="radio_22"
+                  name="PropertyType"
+                />
+                <label for="radio_22" class="radio"
+                  ><span>Single Family Home</span></label
+                >
+                <input
+                  type="radio"
+                  value="Condominium"
+                  id="radio_23"
+                  name="PropertyType"
+                />
+                <label for="radio_23" class="radio"
+                  ><span>Condominium</span></label
+                >
+                <input
+                  type="radio"
+                  value="Town House Planned Unit Development"
+                  id="radio_24"
+                  name="PropertyType"
+                />
+                <label for="radio_24" class="radio"
+                  ><span>Town House Planned Unit Development</span></label
+                >
+              </div>
+
+              <div>
+                What is the <b><u>monthy</u></b> payment amount you wish not to
+                go over?
+                <textarea name="MonthlyPayment" rows="1" required></textarea>
+              </div>
+              <div>
+                Property address you are looking at (or) county you are looking
+                in?
+                <textarea name="PropertyAddress" rows="1" required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>3. Employment</p>
+              <div class="question-answer">
+                Are you self employed?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_25"
+                  name="SelfEmployed"
+                />
+                <label for="radio_25" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_26"
+                  name="SelfEmployed"
+                />
+                <label for="radio_26" class="radio"><span>No</span></label>
+              </div>
+
+              Employment Information
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="EmployerName"
+                  placeholder="Employer Name"
+                />
+                <input
+                  type="text"
+                  name="EmployerAddress"
+                  placeholder="Address"
+                />
+                <input
+                  type="text"
+                  name="EmployerCompanyDirectPhone"
+                  placeholder="Company Direct Phone"
+                />
+                <input
+                  type="text"
+                  name="EmployerPosition"
+                  placeholder="Position"
+                />
+                <input
+                  type="text"
+                  name="EmployerYearlySalary"
+                  placeholder="Yearly Salary"
+                />
+                <input
+                  type="text"
+                  name="EmployerStartDate"
+                  placeholder="Start Date"
+                />
+              </div>
+
+              <div class="question-answer">
+                Do you have a 2 year history of any Bonus/Commission?
+                <input type="radio" value="Yes" id="radio_27" name="Bonus" />
+                <label for="radio_27" class="radio"><span>Yes</span></label>
+                <input type="radio" value="No" id="radio_28" name="Bonus" />
+                <label for="radio_28" class="radio"><span>No</span></label>
+              </div>
+
+              <div>
+                If so, what is the average yearly amount over the last 2 years?
+                <textarea name="BonusAmount" rows="1"></textarea>
+              </div>
+              <br />
+              IF LESS THAN 2 YEARS AT ABOVE EMPLOYMENT, please provide your
+              second most recent employment information.
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="EmployerName2"
+                  placeholder="Employer Name"
+                />
+                <input
+                  type="text"
+                  name="EmployerAddress2"
+                  placeholder="Address"
+                />
+                <input
+                  type="text"
+                  name="EmployerCompanyDirectPhone2"
+                  placeholder="Company Direct Phone"
+                />
+                <input
+                  type="text"
+                  name="EmployerPosition2"
+                  placeholder="Position"
+                />
+                <input
+                  type="text"
+                  name="EmployerYearlySalary2"
+                  placeholder="Yearly Salary"
+                />
+                <input
+                  type="text"
+                  name="EmployerStartDate2"
+                  placeholder="Start Date"
+                />
+                <input
+                  type="text"
+                  name="EmployerEndDate2"
+                  placeholder="End Date"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>
+                4. Assets (checking / savings / stocks / retirement / other)
+              </p>
+              <p>Account 1</p>
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="AccountName1"
+                  placeholder="Name/ Account Type"
+                />
+                <input
+                  type="text"
+                  name="AccountBalance1"
+                  placeholder="Balance"
+                />
+              </div>
+
+              <p>Account 2</p>
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="AccountName2"
+                  placeholder="Name/ Account Type"
+                />
+                <input
+                  type="text"
+                  name="AccountBalance2"
+                  placeholder="Balance"
+                />
+              </div>
+
+              <p>Account 3</p>
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="AccountName3"
+                  placeholder="Name/ Account Type"
+                />
+                <input
+                  type="text"
+                  name="AccountBalance3"
+                  placeholder="Balance"
+                />
+              </div>
+
+              <p>Account 4</p>
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="AccountName4"
+                  placeholder="Name/ Account Type"
+                />
+                <input
+                  type="text"
+                  name="AccountBalance4"
+                  placeholder="Balance"
+                />
+              </div>
+
+              <p>Account 5</p>
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="AccountName5"
+                  placeholder="Name/ Account Type"
+                />
+                <input
+                  type="text"
+                  name="AccountBalance5"
+                  placeholder="Balance"
+                />
+              </div>
+
+              <p>Account 6</p>
+              <div class="name-item">
+                <input
+                  type="text"
+                  name="AccountName6"
+                  placeholder="Name/ Account Type"
+                />
+                <input
+                  type="text"
+                  name="AccountBalance6"
+                  placeholder="Balance"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>
+                5. How much total cash do you wish to use for a down payment and
+                closing costs?
+              </p>
+              <textarea name="TotalCash" rows="1" required></textarea>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>6. Realtor Information</p>
+              <input
+                type="text"
+                name="RealtorName"
+                placeholder="Realtor Name"
+              />
+              <input type="text" name="RealtorCompany" placeholder="Company" />
+              <input
+                type="text"
+                name="RealtorPhone"
+                placeholder="Phone Number"
+              />
+              <input type="text" name="RealtorEmail" placeholder="Email" />
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>7. Veteran Status</p>
+              <div class="question-answer">
+                Are you a Veteran?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_411"
+                  name="Veteran"
+                  required
+                />
+                <label for="radio_411" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_422"
+                  name="Veteran"
+                  required
+                />
+                <label for="radio_422" class="radio"><span>No</span></label>
+              </div>
+              <div>
+                What Branch of Service?
+                <textarea name="VeteranBranch" rows="1"></textarea>
+              </div>
+              <div>
+                Regular or Reserves?
+                <textarea name="VeteranRegRes" rows="1"></textarea>
+              </div>
+              <div>
+                Have you ever used your VA Entitlement before?
+                <textarea name="VeteranEntitlement" rows="1"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>8. Previous Housing</p>
+              <div class="question-answer">
+                Do you have a house to sell?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_4111"
+                  name="House2Sell"
+                  required
+                />
+                <label for="radio_4111" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_4222"
+                  name="House2Sell"
+                  required
+                />
+                <label for="radio_4222" class="radio"><span>No</span></label>
+              </div>
+              <div>
+                Selling Price (Estimate)
+                <textarea name="SellingPrice" rows="1"></textarea>
+              </div>
+              <div>
+                Gross $ due to you at settlement
+                <textarea name="GrossMoneyForSale" rows="1"></textarea>
+              </div>
+              <div class="question-answer">
+                Will this home be sold prior to your new home settlement?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_43"
+                  name="PriorHomeSale"
+                />
+                <label for="radio_43" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_44"
+                  name="PriorHomeSale"
+                />
+                <label for="radio_44" class="radio"><span>No</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="nicediv">
+            <div class="question">
+              <p>9. Credit Inquiry Consent</p>
+              <div class="question-answer">
+                In order for me to issue a pre-approval I need permission to run
+                your credit. Do you consent?
+                <input
+                  type="radio"
+                  value="Yes"
+                  id="radio_45"
+                  name="CreditConsent"
+                  required
+                />
+                <label for="radio_45" class="radio"><span>Yes</span></label>
+                <input
+                  type="radio"
+                  value="No"
+                  id="radio_46"
+                  name="CreditConsent"
+                  required
+                />
+                <label for="radio_46" class="radio"><span>No</span></label>
+              </div>
+              <b
+                >IMPORTANT: IF YOU HAVE A FREEZE ON YOUR CREDIT REPORT YOU MUST
+                GET IT LIFTED!</b
+              >
+              <br />
+              <div>Please confirm with me when completed.</div>
+            </div>
+          </div>
+
+          <div class="item">
+            <p>
+              Thank you for filling out this form! If you have, questions about
+              this form leave the section blank or call <b>Tom McLister</b> for
+              assistance.
+            </p>
+            <br />
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <img src="mclister.jpg" />
+                </div>
+                <div class="col-sm">
+                  <div class="bottomText">
+                    <h1>Tom McLister</h1>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    George Mason Mortgage, LLC
+                    <br />
+                    50 Citizens Way ste 303
+                    <br />
+                    Frederick, MD 21701
+                    <br />
+                    <br />
+                    <br />
+                    Direct : 301-620-2087
+                    <br />
+                    Cell : 301-748-2155
+                    <br />
+                    Fax : 888-858-7995
+                    <br />
+                    tmclister@gmmllc.com
+                    <br />
+                    NMLS# 532688
+                    <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-block">
+            <button type="submit" name="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
